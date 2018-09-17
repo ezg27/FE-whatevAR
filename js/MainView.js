@@ -1,26 +1,24 @@
 'use strict';
 
 import React, { Component } from 'react';
-
 import {StyleSheet} from 'react-native';
-
+import Geolocation from 'react-native-geolocation-service';
 import {
   ViroARScene,
   ViroText,
+  ViroImage,
   ViroConstants,
 } from 'react-viro';
 
-export default class HelloWorldSceneAR extends Component {
+export default class MainView extends Component {
 
   constructor() {
     super();
 
-    // Set initial state here
     this.state = {
       text : "Initializing AR..."
     };
-
-    // bind 'this' to functions
+    
     this._onInitialized = this._onInitialized.bind(this);
   }
 
@@ -53,4 +51,3 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = HelloWorldSceneAR;
