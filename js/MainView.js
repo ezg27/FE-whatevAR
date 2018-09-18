@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import {
   ViroARScene,
@@ -20,20 +20,26 @@ export default class MainView extends Component {
       data: {},
       latitude: null,
       longitude: null,
-      error: null
+      error: null,
+      onHoverId: null,
+      isHovering: false
     };
+ 
+    this._saveBusinessId = this._saveBusinessId.bind(this);
   }
 
   render() {
     if (Object.keys(this.state.data).length > 0) {
-      console.log(this.state)
      return  <ViroARScene>
           {Object.keys(this.state.data).map(businessId => {
-            return <ViroText key={'p' + businessId} text={this.state.data[businessId].name} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, 18, this.state.data[businessId].z]} style={styles.helloWorldTextStyle} />
+            return <ViroText key={'p' + businessId} text={this.state.data[businessId].name} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, 15, this.state.data[businessId].z]} style={styles.helloWorldTextStyle} />
           })} 
-          {Object.keys(this.state.data).map(businessId => {
-            return <ViroImage key={businessId} source={{ uri: 'https://www.freeiconspng.com/uploads/fork-and-knife-22.png' }} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, 0, this.state.data[businessId].z]} />
-          })} 
+          {Object.keys(this.state.data).map((businessId, index) => {
+            const barSrc = require('./res/coctail.png');
+            const restaurantSrc = require('./res/icons8-meal-64.png');
+            return <ViroImage key={businessId} onHover={() => {this._saveBusinessId(businessId)}} source={restaurantSrc} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, 0, this.state.data[businessId].z]} />
+            })} 
+            {this.state.isHovering ? <ViroText text={'hello'} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[this.state.onHoverId].x, -15, this.state.data[this.state.onHoverId].z]} style={styles.hoverText} /> : null}
           </ViroARScene>
     } else return <ViroARScene>
       <ViroText text='Loading...' scale={[1, 1, 1]} transformBehaviors={["billboard"]} position={[0, 0, -2]} />
@@ -66,7 +72,12 @@ export default class MainView extends Component {
       { enableHighAccuracy: true, timeout: 2000, maximumAge: 2000 },
     )
     }
-}
+
+    _saveBusinessId(businessId) {
+      this.setState({ onHoverId: businessId, isHovering: !this.state.isHovering })
+    }
+
+  }
 
 var styles = StyleSheet.create({
   helloWorldTextStyle: {
@@ -76,5 +87,13 @@ var styles = StyleSheet.create({
     textAlignVertical: 'center',
     textAlign: 'center',
   },
+  hoverText: {
+    backgroundColor: 'white',
+    fontFamily: 'Arial',
+    fontSize: 40,
+    color: '#000000',
+    textAlignVertical: 'center',
+    textAlign: 'center',
+  }
 });
 

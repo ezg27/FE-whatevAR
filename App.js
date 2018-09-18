@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import key from './config.js';
 import { ViroARSceneNavigator } from 'react-viro';
 import InitialARScene from './js/MainView.js';
+import { Dimensions, StyleSheet, View } from 'react-native';
 
 const sharedProps = {
   apiKey: key
@@ -22,11 +23,14 @@ export default class ViroSample extends Component {
 
   render() {
     return (
+      <View style={{ flex: 1 }}>
       <ViroARSceneNavigator
         {...this.state.sharedProps}
         initialScene={{ scene: InitialARScene }}
         worldAlignment="GravityAndHeading"
       />
+      <View style={styles.crosshair}/>
+        </View>
     );
   }
 
@@ -36,3 +40,16 @@ export default class ViroSample extends Component {
     });
   }
 }
+
+const styles = StyleSheet.create({
+  crosshair: {
+      position: 'absolute',
+      top: (Dimensions.get('window').height / 2),
+      left: (Dimensions.get('window').width / 2),
+      width: 20,
+      height: 20,
+      borderRadius: 15,
+      borderWidth: 1,
+      backgroundColor: 'grey',
+  },
+})
