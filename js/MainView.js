@@ -7,6 +7,7 @@ import {
   ViroARScene,
   ViroText,
   ViroImage,
+  ViroFlexView
 } from 'react-viro';
 import * as utils from '../utils.js';
 import data from '../data.json';
@@ -31,15 +32,43 @@ export default class MainView extends Component {
   render() {
     if (Object.keys(this.state.data).length > 0) {
      return  <ViroARScene>
-          {Object.keys(this.state.data).map(businessId => {
+          {/* {Object.keys(this.state.data).map(businessId => {
             return <ViroText key={'p' + businessId} text={this.state.data[businessId].name} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, 15, this.state.data[businessId].z]} style={styles.helloWorldTextStyle} />
-          })} 
+          })}  */}
           {Object.keys(this.state.data).map((businessId, index) => {
             const barSrc = require('./res/coctail.png');
             const restaurantSrc = require('./res/icons8-meal-64.png');
             return <ViroImage key={businessId} onHover={() => {this._saveBusinessId(businessId)}} source={restaurantSrc} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, 0, this.state.data[businessId].z]} />
             })} 
-            {this.state.isHovering ? <ViroText text={'hello'} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[this.state.onHoverId].x, -15, this.state.data[this.state.onHoverId].z]} style={styles.hoverText} /> : null}
+            {this.state.isHovering ? 
+            <ViroFlexView
+	         height={50}
+           width={50}
+           opacity={0.9}
+	         position={[this.state.data[this.state.onHoverId].x, -35, this.state.data[this.state.onHoverId].z]}
+	         transformBehaviors={["billboard"]}>
+          		<ViroFlexView backgroundColor={'#e1bee7'} style={{flex:0.2,flexDirection: 'row'}} >
+              <ViroText
+              style={{color: 'black', flex:1}}
+              text={this.state.data[this.state.onHoverId].name}
+              textAlign={'center'}
+              fontWeight={'bold'}
+        			fontSize={480} />
+        	</ViroFlexView>
+          <ViroFlexView backgroundColor={'white'} style={{flex:0.3,flexDirection: 'row'}} >
+          <ViroImage source={require('./res/Yelp_trademark_RGB_outline.png')} style={{flex:1}} scale={[0.5, 0.7, 0.7]}/>
+          </ViroFlexView>
+        	<ViroFlexView backgroundColor={'white'} style={{flex:0.3,flexDirection: 'row'}} >
+        		<ViroText
+              style={{color: 'black', flex:1}}
+              text={`(${this.state.data[this.state.onHoverId].category})`}
+              textAlign={'center'}
+        			fontSize={400} />
+        	</ViroFlexView>
+          <ViroFlexView backgroundColor={'white'} style={{flex:0.2,flexDirection: 'row'}} >
+          <ViroImage source={require('./res/10.png')} style={{flex:1}} scale={[0.5, 0.5, 0.5]}/>
+          </ViroFlexView>
+        </ViroFlexView> : null}
           </ViroARScene>
     } else return <ViroARScene>
       <ViroText text='Loading...' scale={[1, 1, 1]} transformBehaviors={["billboard"]} position={[0, 0, -2]} />
@@ -56,7 +85,9 @@ export default class MainView extends Component {
           businesses[business.id] = {
             x: point.x,
             z: point.z,
-            name: business.name
+            name: business.name,
+            category: business.categories[0].title,
+            rating: business.rating * 2
           }
         }
         })

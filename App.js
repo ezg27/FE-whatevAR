@@ -46,10 +46,10 @@ const styles = StyleSheet.create({
       position: 'absolute',
       top: (Dimensions.get('window').height / 2),
       left: (Dimensions.get('window').width / 2),
-      width: 20,
-      height: 20,
+      width: 15,
+      height: 15,
       borderRadius: 15,
       borderWidth: 1,
-      backgroundColor: 'grey',
+      backgroundColor: '#ffebee',
   },
 })
