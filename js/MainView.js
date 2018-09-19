@@ -31,21 +31,31 @@ export default class MainView extends Component {
 
   render() {
     if (Object.keys(this.state.data).length > 0) {
+      const images = {
+        image0: require('./res/0.png'),
+        image2: require('./res/2.png'),
+        image3: require('./res/3.png'),
+        image4: require('./res/4.png'),
+        image5: require('./res/5.png'),
+        image6: require('./res/6.png'),
+        image7: require('./res/7.png'),
+        image8: require('./res/8.png'),
+        image9: require('./res/9.png'),
+        image10: require('./res/10.png')
+      }
      return  <ViroARScene>
-          {/* {Object.keys(this.state.data).map(businessId => {
-            return <ViroText key={'p' + businessId} text={this.state.data[businessId].name} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, 15, this.state.data[businessId].z]} style={styles.helloWorldTextStyle} />
-          })}  */}
-          {Object.keys(this.state.data).map((businessId, index) => {
-            const barSrc = require('./res/coctail.png');
+          {Object.keys(this.state.data).map(businessId => {
+            const barSrc = require('./res/cocktail.png');
             const restaurantSrc = require('./res/icons8-meal-64.png');
-            return <ViroImage key={businessId} onHover={() => {this._saveBusinessId(businessId)}} source={restaurantSrc} scale={[18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, 0, this.state.data[businessId].z]} />
+            const distance = this.state.data[businessId].distance
+            return <ViroImage key={businessId} onHover={() => {this._saveBusinessId(businessId)}} source={restaurantSrc} scale={distance < 50 ? [10, 10, 10] : [18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, distance < 110 ? 10 : 33, this.state.data[businessId].z]} />
             })} 
             {this.state.isHovering ? 
             <ViroFlexView
-	         height={50}
-           width={50}
+	         height={this.state.data[this.state.onHoverId].distance < 50 ? 26 : 50}
+           width={this.state.data[this.state.onHoverId].distance < 50 ? 26 : 50}
            opacity={0.9}
-	         position={[this.state.data[this.state.onHoverId].x, -35, this.state.data[this.state.onHoverId].z]}
+	         position={[this.state.data[this.state.onHoverId].x, this.state.data[this.state.onHoverId].distance < 50 ? -10 : this.state.data[this.state.onHoverId].distance < 110 ? -25 : -27, this.state.data[this.state.onHoverId].z]}
 	         transformBehaviors={["billboard"]}>
           		<ViroFlexView backgroundColor={'#e1bee7'} style={{flex:0.2,flexDirection: 'row'}} >
               <ViroText
@@ -53,21 +63,28 @@ export default class MainView extends Component {
               text={this.state.data[this.state.onHoverId].name}
               textAlign={'center'}
               fontWeight={'bold'}
-        			fontSize={480} />
+        			fontSize={this.state.data[this.state.onHoverId].distance < 50 ? 300 : 480} />
         	</ViroFlexView>
           <ViroFlexView backgroundColor={'white'} style={{flex:0.3,flexDirection: 'row'}} >
-          <ViroImage source={require('./res/Yelp_trademark_RGB_outline.png')} style={{flex:1}} scale={[0.5, 0.7, 0.7]}/>
+          <ViroImage source={require('./res/Yelp_trademark_RGB_outline.png')} style={{flex:1}} scale={this.state.data[this.state.onHoverId].distance < 50 ? [0.7, 1.3, 0.9] : [0.8, 1.4, 1]}/>
           </ViroFlexView>
-        	<ViroFlexView backgroundColor={'white'} style={{flex:0.3,flexDirection: 'row'}} >
+          <ViroFlexView backgroundColor={'white'} style={{flex:0.2,flexDirection: 'row'}} >
+          <ViroImage source={images['image' + this.state.data[this.state.onHoverId].rating]} style={{flex:1}} scale={[0.5, 0.5, 0.5]}/>
+          </ViroFlexView>
+        	<ViroFlexView backgroundColor={'white'} style={{flex:0.2,flexDirection: 'row'}} >
         		<ViroText
               style={{color: 'black', flex:1}}
-              text={`(${this.state.data[this.state.onHoverId].category})`}
+              text={`${this.state.data[this.state.onHoverId].category}`}
               textAlign={'center'}
-        			fontSize={400} />
+        			fontSize={this.state.data[this.state.onHoverId].distance < 50 ? 220 : 400} />
         	</ViroFlexView>
           <ViroFlexView backgroundColor={'white'} style={{flex:0.2,flexDirection: 'row'}} >
-          <ViroImage source={require('./res/10.png')} style={{flex:1}} scale={[0.5, 0.5, 0.5]}/>
-          </ViroFlexView>
+        		<ViroText
+              style={{color: 'black', flex:1}}
+              text={`${this.state.data[this.state.onHoverId].distance} meters from you`}
+              textAlign={'center'}
+        			fontSize={this.state.data[this.state.onHoverId].distance < 50 ? 220 : 400} />
+        	</ViroFlexView>
         </ViroFlexView> : null}
           </ViroARScene>
     } else return <ViroARScene>
@@ -80,14 +97,20 @@ export default class MainView extends Component {
       (position) => {
         const businesses = {}
         data.businesses.forEach(business => {
-          if (business.distance < 100) {
+          if (business.distance < 120) {
           var point = utils.transformPointToAR(position.coords.latitude, position.coords.longitude, business.coordinates.latitude, business.coordinates.longitude);
+          let categories = ''
+          business.categories.forEach((cat, index) => {
+            if (index !== business.categories.length-1) categories += cat.title + ', ';
+            else categories += cat.title;
+          })
           businesses[business.id] = {
             x: point.x,
             z: point.z,
             name: business.name,
-            category: business.categories[0].title,
-            rating: business.rating * 2
+            category: categories,
+            rating: business.rating * 2,
+            distance: Math.floor(business.distance)
           }
         }
         })
@@ -111,20 +134,5 @@ export default class MainView extends Component {
   }
 
 var styles = StyleSheet.create({
-  helloWorldTextStyle: {
-    fontFamily: 'Arial',
-    fontSize: 20,
-    color: '#000000',
-    textAlignVertical: 'center',
-    textAlign: 'center',
-  },
-  hoverText: {
-    backgroundColor: 'white',
-    fontFamily: 'Arial',
-    fontSize: 40,
-    color: '#000000',
-    textAlignVertical: 'center',
-    textAlign: 'center',
-  }
 });
 
