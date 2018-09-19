@@ -15,20 +15,26 @@ import {
 
 export default class BusinessModal extends Component {
 
+    constructor() {
+        super();
+
+        this._handleOnClick = this._handleOnClick.bind(this);
+      }
     render() {
-   
         return (
             <View style={localStyles.outer} >
             <View style={localStyles.inner} >
-    
               <TouchableHighlight style={localStyles.buttons}
-                underlayColor={'#68a0ff'} >
-    
-                <Text style={localStyles.buttonText}>AR</Text>
+                underlayColor={'#68a0ff'} onPress={this._handleOnClick}>
+                <Text style={localStyles.buttonText}>Close modal</Text>
               </TouchableHighlight>
             </View>
           </View>
         )
+    }
+
+    _handleOnClick() {
+        this.props.closeModal()
     }
 }
 

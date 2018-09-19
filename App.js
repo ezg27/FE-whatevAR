@@ -23,6 +23,7 @@ export default class ViroSample extends Component {
     };
     this._exitViro = this._exitViro.bind(this);
     this._openModal = this._openModal.bind(this);
+    this._closeModal = this._closeModal.bind(this);
   }
 
   render() {
@@ -33,7 +34,7 @@ export default class ViroSample extends Component {
         initialScene={{ scene: MainView }}
         worldAlignment="GravityAndHeading"
         viroAppProps={{openModal: this._openModal}}
-      /> : <BusinessModal/>}
+      /> : <BusinessModal closeModal={this._closeModal}/>}
       {!this.state.openModal ? <View style={styles.crosshair}/> : null}
         </View>
     );
@@ -47,6 +48,10 @@ export default class ViroSample extends Component {
 
   _openModal(businessId) {
     this.setState({ openModal: businessId })
+  }
+
+  _closeModal() {
+    this.setState({ openModal: null })
   }
 }
 

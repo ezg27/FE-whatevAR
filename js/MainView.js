@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import Card from './Card.js';
-import BusinessModal from './BusinessModal.js';
 import Geolocation from 'react-native-geolocation-service';
 import {
   ViroARScene,
