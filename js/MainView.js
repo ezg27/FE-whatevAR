@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import Card from './Card.js';
+import BusinessModal from './BusinessModal.js';
 import Geolocation from 'react-native-geolocation-service';
 import {
   ViroARScene,
@@ -26,6 +27,7 @@ export default class MainView extends Component {
     };
 
     this._saveBusinessId = this._saveBusinessId.bind(this);
+    this._openAppModal = this._openAppModal.bind(this);
   }
 
   render() {
@@ -35,10 +37,9 @@ export default class MainView extends Component {
           const barSrc = require('./res/cocktail.png');
           const restaurantSrc = require('./res/icons8-meal-64.png');
           const distance = this.state.data[businessId].distance
-          return <ViroImage key={businessId} onHover={() => { this._saveBusinessId(businessId) }} source={restaurantSrc} scale={distance < 50 ? [10, 10, 10] : [18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, distance < 50 ? 8 : distance < 110 ? 10 : 33, this.state.data[businessId].z]} />
+          return <ViroImage key={businessId} onClick={() => this._openAppModal(businessId)} onHover={() => { this._saveBusinessId(businessId) }} source={restaurantSrc} scale={distance < 50 ? [10, 10, 10] : [18, 18, 18]} transformBehaviors={["billboard"]} position={[this.state.data[businessId].x, distance < 50 ? 8 : distance < 110 ? 10 : 33, this.state.data[businessId].z]} />
         })}
-        {this.state.isHovering ?
-        <Card business={this.state.data[this.state.onHoverId]} /> : null}
+        {this.state.isHovering ? <Card business={this.state.data[this.state.onHoverId]} /> : null}
       </ViroARScene>
     } else return <ViroARScene>
       <ViroText text='Loading...' scale={[1, 1, 1]} transformBehaviors={["billboard"]} position={[0, 0, -2]} />
@@ -86,5 +87,8 @@ export default class MainView extends Component {
     this.setState({ onHoverId: businessId, isHovering: !this.state.isHovering })
   }
 
+  _openAppModal(businessId) {
+    this.props.arSceneNavigator.viroAppProps.openModal(businessId)
+}
 }
 

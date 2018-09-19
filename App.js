@@ -3,6 +3,7 @@ import key from './config.js';
 import { ViroARSceneNavigator } from 'react-viro';
 import MainView from './js/MainView.js';
 import { Dimensions, StyleSheet, View } from 'react-native';
+import BusinessModal from './js/BusinessModal.js';
 
 const sharedProps = {
   apiKey: key
@@ -17,20 +18,23 @@ export default class ViroSample extends Component {
 
     this.state = {
       navigatorType: defaultNavigatorType,
-      sharedProps: sharedProps
+      sharedProps: sharedProps,
+      openModal: null
     };
     this._exitViro = this._exitViro.bind(this);
+    this._openModal = this._openModal.bind(this);
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-     <ViroARSceneNavigator
+     {!this.state.openModal ? <ViroARSceneNavigator
         {...this.state.sharedProps}
         initialScene={{ scene: MainView }}
         worldAlignment="GravityAndHeading"
-      />
-      <View style={styles.crosshair}/>
+        viroAppProps={{openModal: this._openModal}}
+      /> : <BusinessModal/>}
+      {!this.state.openModal ? <View style={styles.crosshair}/> : null}
         </View>
     );
   }
@@ -39,6 +43,10 @@ export default class ViroSample extends Component {
     this.setState({
       navigatorType: UNSET
     });
+  }
+
+  _openModal(businessId) {
+    this.setState({ openModal: businessId })
   }
 }
 
@@ -51,6 +59,6 @@ const styles = StyleSheet.create({
       height: 15,
       borderRadius: 15,
       borderWidth: 1,
-      backgroundColor: '#ffebee',
+      backgroundColor: '#ffebee'
   },
 })
