@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import key from './config.js';
 import { ViroARSceneNavigator } from 'react-viro';
-import InitialARScene from './js/MainView.js';
+import MainView from './js/MainView.js';
 import { Dimensions, StyleSheet, View } from 'react-native';
 
 const sharedProps = {
@@ -9,6 +9,7 @@ const sharedProps = {
 };
 const UNSET = 'UNSET';
 const defaultNavigatorType = UNSET;
+console.disableYellowBox = true;
 
 export default class ViroSample extends Component {
   constructor() {
@@ -24,9 +25,9 @@ export default class ViroSample extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-      <ViroARSceneNavigator
+     <ViroARSceneNavigator
         {...this.state.sharedProps}
-        initialScene={{ scene: InitialARScene }}
+        initialScene={{ scene: MainView }}
         worldAlignment="GravityAndHeading"
       />
       <View style={styles.crosshair}/>
