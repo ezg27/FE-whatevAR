@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import data from '../businessData.json';
 import {
     ViroText,
     ViroImage,
@@ -24,9 +25,10 @@ export default class BusinessModal extends Component {
         return (
             <View style={localStyles.outer} >
             <View style={localStyles.inner} >
+            <Text>{data.name}</Text>
               <TouchableHighlight style={localStyles.buttons}
                 underlayColor={'#68a0ff'} onPress={this._handleOnClick}>
-                <Text style={localStyles.buttonText}>Close modal</Text>
+                <Text style={localStyles.buttonText}>Close</Text>
               </TouchableHighlight>
             </View>
           </View>
@@ -39,21 +41,17 @@ export default class BusinessModal extends Component {
 }
 
 var localStyles = StyleSheet.create({
-    viroContainer :{
-      flex : 1,
-      backgroundColor: "black",
-    },
     outer : {
       flex : 1,
       flexDirection: 'row',
       alignItems:'center',
-      backgroundColor: "black",
+      backgroundColor: "white",
     },
     inner: {
       flex : 1,
       flexDirection: 'column',
       alignItems:'center',
-      backgroundColor: "black",
+      backgroundColor: "white",
     },
     titleText: {
       paddingTop: 30,
