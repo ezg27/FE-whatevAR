@@ -20,6 +20,12 @@ export default class Card extends Component {
             image9: require('./res/9.png'),
             image10: require('./res/10.png')
           }
+          const prices = {
+            '£': require('./res/£.png'),
+            '££': require('./res/££.png'),
+            '£££': require('./res/£££.png'),
+            '££££': require('./res/££££.png'),
+          }
       return (
       <ViroFlexView
       height={this.props.business.distance < 50 ? 26 : 50}
@@ -36,7 +42,7 @@ export default class Card extends Component {
           fontSize={this.props.business.distance < 50 ? 300 : 480} />
       </ViroFlexView>
       <ViroFlexView backgroundColor={'white'} style={{ flex: 0.2, flexDirection: 'row' }} >
-        <ViroImage source={require('./res/Yelp_trademark_RGB_outline.png')} style={{ flex: 1 }} scale={this.props.business.distance < 50 ? [0.6, 1.3, 0.8] : [0.7, 1.4, 0.9]} />
+        <ViroImage source={require('./res/Yelp_trademark_RGB_outline.png')} style={{ flex: 1 }} scale={this.props.business.distance < 50 ? [0.6, 1.7, 0.8] : [0.7, 1.8, 0.9]} />
       </ViroFlexView>
       <ViroFlexView backgroundColor={'white'} style={{ flex: 0.2, flexDirection: 'row' }} >
         <ViroImage source={images['image' + this.props.business.rating]} style={{ flex: 1 }} scale={[0.5, 0.5, 0.5]} />
@@ -49,7 +55,7 @@ export default class Card extends Component {
           fontSize={this.props.business.distance < 50 ? 220 : 400} />
       </ViroFlexView>
       <ViroFlexView backgroundColor={'white'} style={{ flex: 0.1, flexDirection: 'row' }} >
-        <ViroImage source={require('./res/££££400px.png')} style={{ flex: 1 }} scale={[0.3, 0.7, 0.3]} />
+        <ViroImage source={prices[this.props.business.price]} style={{ flex: 1 }} scale={[0.3, 1, 0.3]} />
       </ViroFlexView>
       <ViroFlexView backgroundColor={'white'} style={{ flex: 0.2, flexDirection: 'row' }} >
         <ViroText

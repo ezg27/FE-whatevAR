@@ -4,6 +4,7 @@ import { ViroARSceneNavigator } from 'react-viro';
 import MainView from './js/MainView.js';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import BusinessModal from './js/BusinessModal.js';
+import LoadingPage from './js/LoadingPage.js';
 
 const sharedProps = {
   apiKey: key
@@ -19,7 +20,8 @@ export default class ViroSample extends Component {
     this.state = {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps,
-      openModal: null
+      openModal: null,
+      loadingPage: false
     };
     this._exitViro = this._exitViro.bind(this);
     this._openModal = this._openModal.bind(this);
@@ -29,15 +31,26 @@ export default class ViroSample extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-     {!this.state.openModal ? <ViroARSceneNavigator
+     {!this.state.openModal && this.state.loadingPage ? <LoadingPage /> :  
+     this.state.openModal && !this.state.loadingPage ? 
+     <BusinessModal closeModal={this._closeModal}/> :
+     <ViroARSceneNavigator
         {...this.state.sharedProps}
         initialScene={{ scene: MainView }}
         worldAlignment="GravityAndHeading"
         viroAppProps={{openModal: this._openModal}}
-      /> : <BusinessModal closeModal={this._closeModal}/>}
-      {!this.state.openModal ? <View style={styles.crosshair}/> : null}
+      />}
+      {!this.state.openModal && !this.state.loadingPage ? <View style={styles.crosshair}/> : null}
         </View>
     );
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+          loadingPage: false
+      })
+  }, 2000)
   }
 
   _exitViro() {

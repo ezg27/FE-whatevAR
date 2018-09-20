@@ -65,7 +65,8 @@ export default class MainView extends Component {
               name: business.name,
               category: categories,
               rating: business.rating * 2,
-              distance: Math.floor(business.distance)
+              distance: Math.floor(business.distance),
+              price: business.price
             }
           }
         })
