@@ -32,7 +32,7 @@ export default class Card extends Component {
       width={this.props.business.distance < 50 ? 26 : 50}
       opacity={0.9}
       position={[this.props.business.x, this.props.business.distance < 50 ? -10 : this.props.business.distance < 110 ? -25 : -27, this.props.business.z]}
-      transformBehaviors={["billboard"]}>
+      transformBehaviors={['billboard']}>
       <ViroFlexView backgroundColor={'#e1bee7'} style={{ flex: 0.2, flexDirection: 'row' }} >
         <ViroText
           style={{ color: 'black', flex: 1 }}
