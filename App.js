@@ -21,7 +21,7 @@ export default class ViroSample extends Component {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps,
       openModal: null,
-      loadingPage: false
+      loadingPage: true
     };
     this._exitViro = this._exitViro.bind(this);
     this._openModal = this._openModal.bind(this);

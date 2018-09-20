@@ -11,7 +11,8 @@ import {
     TouchableHighlight,
     View,
     StyleSheet,
-    Image
+    Image,
+    ImageBackground
  } 
  from 'react-native'
 
@@ -32,10 +33,16 @@ export default class BusinessModal extends Component {
             'fhrs_0_en-gb': require('./res/fhrs_0_en-gb.jpg')
         }
         return (
-            <View style={localStyles.outer} >
             <View style={localStyles.inner} >
+            {/* <View style={localStyles.inner} > */}
+            <View style={{height: data.name.length < 20 ? '23%' : '28%', width: '100%', bottom: 20}}>
+            <ImageBackground source={require('./res/Mojito.jpg')} style={{width: '100%', height: '100%'}}>
             <Text style={localStyles.titleText}>{data.name}</Text>
-            {data.phone ? <Text style={localStyles.text}>{data.phone}</Text> : null}
+            <Text style={{fontSize: 20, textAlign: 'center', color: 'white'}}>{data.location.address1}</Text>
+            <Text style={{fontSize: 20, textAlign: 'center', color: 'white'}}>{data.location.zip_code}</Text>
+            {data.phone ? <Text style={{fontSize: 20, textAlign: 'center', color: 'white'}}>{data.phone}</Text> : null}
+            </ImageBackground>
+            </View>
             <View style={localStyles.images}>
             <Image style={localStyles.singleImage} source={{uri: data.photos[0]}}/>
             <Image style={localStyles.singleImage} source={{uri: data.photos[1]}}/>
@@ -52,12 +59,12 @@ export default class BusinessModal extends Component {
                 <View style={localStyles.day}><Text style={localStyles.text}>Sun: </Text><Text style={localStyles.hours}>closed</Text></View>
             </View>
             <Image style={{width: 130, height: 65, margin: 10}} source={hygiene_rating[data.hygiene_rating]}/>
-              <TouchableHighlight style={localStyles.buttons}
+              <TouchableHighlight style={data.name.length > 20 ? localStyles.button : localStyles.smallButton} 
                 underlayColor={'#68a0ff'} onPress={this._handleOnClick}>
                 <Text style={localStyles.buttonText}>Close</Text>
               </TouchableHighlight>
             </View>
-          </View>
+        //   </View>
         )
     }
 
@@ -67,12 +74,6 @@ export default class BusinessModal extends Component {
 }
 
 var localStyles = StyleSheet.create({
-    outer : {
-      flex : 1,
-      flexDirection: 'row',
-      alignItems:'center',
-      backgroundColor: "white",
-    },
     inner: {
       flex : 1,
       flexDirection: 'column',
@@ -80,45 +81,48 @@ var localStyles = StyleSheet.create({
       backgroundColor: "white",
     },
     titleText: {
-        fontFamily: 'Arial',
+        fontFamily: 'Avenir',
         fontSize: 30,
-        color: '#000000',
-        textAlignVertical: 'center',
+        color: 'white',
+        //textAlignVertical: 'center',
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        paddingTop: 30
     },
     buttonText: {
+        fontFamily: 'Avenir',
       color:'#fff',
       textAlign:'center',
-      fontSize : 20
+      fontSize : 23,
+      textAlignVertical: 'center'
     },
-    buttons : {
+    button : {
       height: 40,
       width: 100,
-      paddingTop:5,
+      paddingTop: 5,
       paddingBottom:5,
-      marginTop: 10,
+      marginTop: 2,
       marginBottom: 10,
-      backgroundColor:'#68a0cf',
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: '#fff',
+      backgroundColor:'#1D976C',
+      borderRadius: 10
     },
-    exitButton : {
-      height: 50,
-      width: 100,
-      paddingTop:10,
-      paddingBottom:10,
-      marginTop: 10,
-      marginBottom: 10,
-      backgroundColor:'#68a0cf',
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: '#fff',
-    },
+    smallButton : {
+        height: 40,
+        width: 100,
+        paddingTop: 5,
+        paddingBottom:5,
+        marginTop: 15,
+        marginBottom: 10,
+        backgroundColor:'#1D976C',
+        borderRadius: 10
+      },
     images: {
         flexDirection: 'row',
-        margin: 5
+        bottom: 5,
+        shadowColor: 'black',
+        shadowOffset: {width: 2, height: 2},
+        shadowRadius: 4,
+        shadowOpacity:  0.8
     },
     singleImage: {
         height: 100,
@@ -127,29 +131,34 @@ var localStyles = StyleSheet.create({
     },
     openingTimes: {
         margin: 5,
-        width: '40%'
+        width: '48%'
     },
     day: {
         flexDirection: 'row'
     },
     text: {
-        fontSize: 15,
-        position: 'absolute'
+        fontFamily: 'Avenir',
+        fontSize: 18,
+        position: 'absolute',
+        fontWeight: 'bold'
     },
     hours: {
-        fontSize: 15,
+        fontFamily: 'Avenir',
+        fontSize: 18,
         textAlign: 'center',
         left: '350%'
     },
     open: {
-        color: 'green',
-        fontSize: 18,
+        fontFamily: 'Avenir',
+        color: '#1D976C',
+        fontSize: 25,
         fontWeight: 'bold',
         margin: 5
     },
     closed: {
+        fontFamily: 'Avenir',
         color: 'red',
-        fontSize: 18,
+        fontSize: 25,
         fontWeight: 'bold',
         margin: 5
     },

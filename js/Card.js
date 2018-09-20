@@ -39,6 +39,7 @@ export default class Card extends Component {
           text={this.props.business.name}
           textAlign={'center'}
           fontWeight={'bold'}
+          fontFamily={'Avenir'}
           fontSize={this.props.business.distance < 50 ? 300 : 480} />
       </ViroFlexView>
       <ViroFlexView backgroundColor={'white'} style={{ flex: 0.2, flexDirection: 'row' }} >

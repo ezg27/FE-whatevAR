@@ -43,7 +43,7 @@ var localStyles = StyleSheet.create({
       alignItems:'center'
     },
     titleText: {
-        fontFamily: 'Arial',
+        fontFamily: 'Avenir',
         fontSize: 50,
         color: '#000000',
         textAlignVertical: 'center',
