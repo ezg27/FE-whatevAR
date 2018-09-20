@@ -26,12 +26,19 @@ export default class Card extends Component {
             '£££': require('./res/£££.png'),
             '££££': require('./res/££££.png'),
           }
+          let categories = '';
+            this.props.business.categories.forEach((cat, index) => {
+              if (index < 3) {
+                if (index !== this.props.business.categories.length - 1) categories += cat + ', ';
+                else categories += cat;
+              }
+            })
       return (
       <ViroFlexView
       height={this.props.business.distance < 50 ? 26 : 50}
       width={this.props.business.distance < 50 ? 26 : 50}
       opacity={0.9}
-      position={[this.props.business.x, this.props.business.distance < 50 ? -10 : this.props.business.distance < 110 ? -25 : -27, this.props.business.z]}
+      position={[this.props.business.position[0], this.props.business.distance < 50 ? -10 : this.props.business.distance < 110 ? -25 : -27, this.props.business.position[2]]}
       transformBehaviors={['billboard']}>
       <ViroFlexView backgroundColor={'#e1bee7'} style={{ flex: 0.2, flexDirection: 'row' }} >
         <ViroText
@@ -51,7 +58,7 @@ export default class Card extends Component {
       <ViroFlexView backgroundColor={'white'} style={{ flex: 0.2, flexDirection: 'row' }} >
         <ViroText
           style={{ color: 'black', flex: 1 }}
-          text={this.props.business.category}
+          text={categories}
           textAlign={'center'}
           fontSize={this.props.business.distance < 50 ? 220 : 400} />
       </ViroFlexView>

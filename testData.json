@@ -1,0 +1,109 @@
+{
+    "W1bb3agzrK1VwXDpC-9MyQ": {
+        "id": "W1bb3agzrK1VwXDpC-9MyQ",
+        "name": "The Printworks",
+        "rating": 6,
+        "position": [
+            -52.86783247886342,
+            0,
+            127.37078336626291
+        ],
+        "price": "££",
+        "distance": 81,
+        "categories": [
+            "Cinema",
+            "Bars"
+        ]
+    },
+    "kf9RtvpXjoDW_psN43S4sg": {
+        "id": "kf9RtvpXjoDW_psN43S4sg",
+        "name": "The Pilcrow",
+        "rating": 9,
+        "position": [
+            -53.255632350599626,
+            0,
+            -83.0121081834659
+        ],
+        "price": "£",
+        "distance": 58,
+        "categories": [
+            "Pubs"
+        ]
+    },
+    "wSV6ZxJgV0-NkIjgKUPCJg": {
+        "id": "wSV6ZxJgV0-NkIjgKUPCJg",
+        "name": "Manchipster Plaice",
+        "rating": 10,
+        "position": [
+            -25.492163391667418,
+            0,
+            282.6832272466272
+        ],
+        "price": "£",
+        "distance": 168,
+        "categories": [
+            "Fish & Chips",
+            "Fast Food"
+        ]
+    },
+    "1D5FX5ugqy-S36sP3e_MGw": {
+        "id": "1D5FX5ugqy-S36sP3e_MGw",
+        "name": "Walkabout",
+        "rating": 9,
+        "position": [
+            -24.490287974505918,
+            0,
+            222.6302536148578
+        ],
+        "price": "££",
+        "distance": 138,
+        "categories": [
+            "Australian"
+        ]
+    },
+    "n2D19GaCMEYny9mBaUWR-w": {
+        "id": "n2D19GaCMEYny9mBaUWR-w",
+        "name": "Lloyds No. 1 Bar",
+        "rating": 5,
+        "position": [
+            -55.33697108217166,
+            0,
+            242.4753800733015
+        ],
+        "price": "££",
+        "distance": 147,
+        "categories": [
+            "Pubs"
+        ]
+    },
+    "Crqs-NxnkYr2DGbbCvRNMw": {
+        "id": "Crqs-NxnkYr2DGbbCvRNMw",
+        "name": "The Seven Stars",
+        "rating": 8,
+        "position": [
+            -4.2858003955334425,
+            0,
+            225.24939590133727
+        ],
+        "price": "£",
+        "distance": 117,
+        "categories": [
+            "Restaurants"
+        ]
+    },
+    "Y3CmxclTWhcbvVkNE1K5Vg": {
+        "id": "Y3CmxclTWhcbvVkNE1K5Vg",
+        "name": "Frankie & Benny's",
+        "rating": 5,
+        "position": [
+            -47.492671157000586,
+            0,
+            222.33743514027447
+        ],
+        "price": "££",
+        "distance": 135,
+        "categories": [
+            "American (New)"
+        ]
+    }
+}
