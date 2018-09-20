@@ -77,7 +77,7 @@ export default class MainView extends Component {
   }
 
   _openAppModal(businessId) {
-    this.props.arSceneNavigator.viroAppProps.openModal(businessId)
+    this.props.arSceneNavigator.viroAppProps.openModal(businessId, this.state.data[businessId].name)
 }
 }
 

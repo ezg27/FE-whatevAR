@@ -20,7 +20,10 @@ export default class ViroSample extends Component {
     this.state = {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps,
-      openModal: null,
+      openModal: {
+        id: null,
+        name: null
+      },
       loadingPage: true
     };
     this._exitViro = this._exitViro.bind(this);
@@ -31,26 +34,26 @@ export default class ViroSample extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-     {!this.state.openModal && this.state.loadingPage ? <LoadingPage /> :  
-     this.state.openModal && !this.state.loadingPage ? 
-     <BusinessModal closeModal={this._closeModal}/> :
-     <ViroARSceneNavigator
-        {...this.state.sharedProps}
-        initialScene={{ scene: MainView }}
-        worldAlignment="GravityAndHeading"
-        viroAppProps={{openModal: this._openModal}}
-      />}
-      {!this.state.openModal && !this.state.loadingPage ? <View style={styles.crosshair}/> : null}
-        </View>
+        {!this.state.openModal.id && this.state.loadingPage ? <LoadingPage /> :
+          this.state.openModal.id && !this.state.loadingPage ?
+            <BusinessModal closeModal={this._closeModal} business={this.state.openModal}/> :
+            <ViroARSceneNavigator
+              {...this.state.sharedProps}
+              initialScene={{ scene: MainView }}
+              worldAlignment="GravityAndHeading"
+              viroAppProps={{ openModal: this._openModal }}
+            />}
+        {!this.state.openModal.id && !this.state.loadingPage ? <View style={styles.crosshair} /> : null}
+      </View>
     );
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-          loadingPage: false
+        loadingPage: false
       })
-  }, 2000)
+    }, 2000)
   }
 
   _exitViro() {
@@ -59,24 +62,29 @@ export default class ViroSample extends Component {
     });
   }
 
-  _openModal(businessId) {
-    this.setState({ openModal: businessId })
+  _openModal(businessId, businessName) {
+    this.setState({
+      openModal: {
+        id: businessId,
+        name: businessName
+      }
+    })
   }
 
   _closeModal() {
-    this.setState({ openModal: null })
+    this.setState({ openModal: {id: null, name: null } })
   }
 }
 
 const styles = StyleSheet.create({
   crosshair: {
-      position: 'absolute',
-      top: (Dimensions.get('window').height / 2),
-      left: (Dimensions.get('window').width / 2),
-      width: 15,
-      height: 15,
-      borderRadius: 15,
-      borderWidth: 1,
-      backgroundColor: '#ffebee'
+    position: 'absolute',
+    top: (Dimensions.get('window').height / 2),
+    left: (Dimensions.get('window').width / 2),
+    width: 15,
+    height: 15,
+    borderRadius: 15,
+    borderWidth: 1,
+    backgroundColor: '#ffebee'
   },
 })

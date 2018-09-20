@@ -4,6 +4,7 @@ import {
       ViroImage,
       ViroFlexView
     } from 'react-viro';
+import propTypes from 'prop-types';
 
 export default class Card extends Component {
   
@@ -75,5 +76,9 @@ export default class Card extends Component {
     </ViroFlexView>
       )
    }
+}
+
+Card.propTypes = {
+  business: propTypes.object
 }
 
