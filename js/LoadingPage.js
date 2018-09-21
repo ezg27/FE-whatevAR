@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 import {
-    ViroText,
-    ViroImage,
-    ViroFlexView,
-    ViroARSceneNavigator
-} from 'react-viro';
-import {
     Text,
     View,
     StyleSheet,

@@ -54,18 +54,19 @@ export default class MainView extends Component {
   componentDidMount() {
     Geolocation.getCurrentPosition(
       (position) => {
-        this.setState({ data })
-        // fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/${position.coords.latitude}/${position.coords.longitude}`)
-        //  .then(buffer => buffer.json())
-        //  .then(res => {
-        //   const filteredRes = {}
-        //   for (let k in res) {
-        //     if (res[k].distance < 100) {
-        //       filteredRes[k] = res[k]
-        //     }
-        //   }
-        //    this.setState({ data: filteredRes })
-        //   });
+       //this.setState({ data })
+        fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/${position.coords.latitude}/${position.coords.longitude}`)
+         .then(buffer => buffer.json())
+         .then(res => {
+           console.log(res)
+          const filteredRes = {}
+          for (let k in res) {
+            if (res[k].distance < 150) {
+              filteredRes[k] = res[k]
+            }
+          }
+           this.setState({ data: filteredRes })
+          });
       },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 2000, maximumAge: 2000 },

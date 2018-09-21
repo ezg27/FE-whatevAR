@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import data from '../businessData.json';
 import propTypes from 'prop-types';
 import {
-    ViroText,
-    ViroImage,
-    ViroFlexView,
-    ViroARSceneNavigator
-} from 'react-viro';
-import {
     Text,
     TouchableHighlight,
     View,
@@ -36,6 +30,7 @@ export default class BusinessModal extends Component {
             'fhrs_0_en-gb': require('./res/fhrs_0_en-gb.jpg')
         }
         if (Object.keys(this.state.business).length !== 0) {
+            console.log(this.state.business)
             return (
                 <View style={localStyles.inner} >
                     <View style={{ height: this.state.business.name.length < 20 ? '23%' : '28%', width: '100%', bottom: 20 }}>
@@ -74,7 +69,7 @@ export default class BusinessModal extends Component {
     }
 
     componentDidMount() {
-        let businessName = this.props.business.name.toLowerCase().replace(/\s/g, '+')
+        let businessName = this.props.business.name.toLowerCase().replace(/\s/g, '+').replace(/&/g, 'and');
         fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/business/${this.props.business.id}/${businessName}`)
             .then(buffer => buffer.json())
             .then(res => {
