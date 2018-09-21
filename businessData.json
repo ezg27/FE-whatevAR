@@ -1,90 +1,25 @@
 {
     "id": "kf9RtvpXjoDW_psN43S4sg",
-    "alias": "the-pilcrow-manchester",
     "name": "The Pilcrow",
-    "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/6vP5dB_wVP1XIOv3QOCULA/o.jpg",
-    "is_claimed": false,
-    "is_closed": false,
-    "url": "https://www.yelp.com/biz/the-pilcrow-manchester?adjust_creative=FZd4QlzocSmc628LyrqmlQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=FZd4QlzocSmc628LyrqmlQ",
-    "phone": "",
-    "display_phone": "",
-    "review_count": 3,
-    "categories": [
-        {
-            "alias": "pubs",
-            "title": "Pubs"
-        }
-    ],
+    "phone": "0161768543",
     "rating": 4.5,
-    "location": {
-        "address1": "Sadler's Yard",
-        "address2": "",
-        "address3": null,
-        "city": "Manchester",
-        "zip_code": "M60 0AB",
-        "country": "GB",
-        "state": "XGM",
-        "display_address": [
-            "Sadler's Yard",
-            "Manchester M60 0AB",
-            "United Kingdom"
-        ],
-        "cross_streets": ""
-    },
-    "coordinates": {
-        "latitude": 53.4867437065711,
-        "longitude": -2.24017840348506
-    },
+    "address": "Sadler's Yard",
+    "postcode": "M60 0AB",
     "photos": [
         "https://s3-media2.fl.yelpcdn.com/bphoto/6vP5dB_wVP1XIOv3QOCULA/o.jpg",
         "https://s3-media1.fl.yelpcdn.com/bphoto/AzaVCRZG4CPBbqbDByfz7g/o.jpg",
         "https://s3-media1.fl.yelpcdn.com/bphoto/lOM0ONU2kjepGb_zMpCpbQ/o.jpg"
     ],
-    "hygiene_rating": "fhrs_5_en-gb",
+    "foodRating": "fhrs_5_en-gb",
     "price": "£",
     "hours": [
-        {
-            "open": [
-                {
-                    "is_overnight": false,
-                    "start": "1200",
-                    "end": "2230",
-                    "day": 0
-                },
-                {
-                    "is_overnight": false,
-                    "start": "1200",
-                    "end": "2230",
-                    "day": 1
-                },
-                {
-                    "is_overnight": false,
-                    "start": "1200",
-                    "end": "2230",
-                    "day": 2
-                },
-                {
-                    "is_overnight": false,
-                    "start": "1200",
-                    "end": "2230",
-                    "day": 3
-                },
-                {
-                    "is_overnight": false,
-                    "start": "1200",
-                    "end": "2330",
-                    "day": 4
-                },
-                {
-                    "is_overnight": false,
-                    "start": "1200",
-                    "end": "2330",
-                    "day": 5
-                }
-            ],
-            "hours_type": "REGULAR",
-            "is_open_now": true
-        }
+        "12:00 - 22:30",
+        "12:00 - 22:30",
+        "12:00 - 22:30",
+        "12:00 - 22:30",
+        "12:00 - 22:30",
+        "12:00 - 22:30",
+        "closed"
     ],
-    "transactions": []
+    "isOpen": true
 }

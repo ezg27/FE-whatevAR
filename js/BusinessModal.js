@@ -16,9 +16,11 @@ export default class BusinessModal extends Component {
     constructor() {
         super();
         this.state = {
-            business: {}
+            business: {},
+            error: false
         }
         this._handleOnClick = this._handleOnClick.bind(this);
+        this._redirectToApp = this._redirectToApp.bind(this);
     }
     render() {
         const hygiene_rating = {
@@ -30,7 +32,6 @@ export default class BusinessModal extends Component {
             'fhrs_0_en-gb': require('./res/fhrs_0_en-gb.jpg')
         }
         if (Object.keys(this.state.business).length !== 0) {
-            console.log(this.state.business)
             return (
                 <View style={localStyles.inner} >
                     <View style={{ height: this.state.business.name.length < 20 ? '23%' : '28%', width: '100%', bottom: 20 }}>
@@ -69,27 +70,36 @@ export default class BusinessModal extends Component {
     }
 
     componentDidMount() {
+       //this.setState({ business: data })
         let businessName = this.props.business.name.toLowerCase().replace(/\s/g, '+').replace(/&/g, 'and');
         fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/business/${this.props.business.id}/${businessName}`)
             .then(buffer => buffer.json())
             .then(res => {
-                if (res.hours !== null) this.setState({ business: res })
+                if (res.message) {
+                    this.setState({ error: true }, () => this._redirectToApp())
+                } else if (res.hours !== null) this.setState({ business: res })
                 else this.setState({
                     business: {
                         ...res,
                         hours: ['No listing', 'No listing', 'No listing', 'No listing', 'No listing', 'No listing', 'No listing']
                     }
                 })
-            });
+           });
     }
 
     _handleOnClick() {
-        this.props.closeModal()
+        this.props.closeModal();
     }
+
+    _redirectToApp() {
+        this.props.displayError()
+      }
 }
 
 BusinessModal.propTypes = {
-    closeModal: propTypes.func
+    business: propTypes.object,
+    closeModal: propTypes.func,
+    displayError: propTypes.func
 }
 
 var localStyles = StyleSheet.create({

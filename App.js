@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import key from './config.js';
 import { ViroARSceneNavigator } from 'react-viro';
 import MainView from './js/MainView.js';
+import Error from './js/Error.js';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import BusinessModal from './js/BusinessModal.js';
 import LoadingPage from './js/LoadingPage.js';
@@ -24,26 +25,29 @@ export default class ViroSample extends Component {
         id: null,
         name: null
       },
-      loadingPage: true
+      loadingPage: true,
+      error: false
     };
     this._exitViro = this._exitViro.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
+    this._displayError = this._displayError.bind(this);
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        {!this.state.openModal.id && this.state.loadingPage ? <LoadingPage /> :
+        { this.state.error ? <Error displayError={this._displayError}/> :
+          !this.state.openModal.id && this.state.loadingPage ? <LoadingPage /> :
           this.state.openModal.id && !this.state.loadingPage ?
-            <BusinessModal closeModal={this._closeModal} business={this.state.openModal}/> :
+            <BusinessModal closeModal={this._closeModal} business={this.state.openModal} displayError={this._displayError} /> :
             <ViroARSceneNavigator
               {...this.state.sharedProps}
               initialScene={{ scene: MainView }}
               worldAlignment="GravityAndHeading"
-              viroAppProps={{ openModal: this._openModal }}
+              viroAppProps={{ openModal: this._openModal, displayError: this._displayError }}
             />}
-        {!this.state.openModal.id && !this.state.loadingPage ? <View style={styles.crosshair} /> : null}
+        {!this.state.openModal.id && !this.state.loadingPage && !this.state.error ? <View style={styles.crosshair} /> : null}
       </View>
     );
   }
@@ -73,6 +77,10 @@ export default class ViroSample extends Component {
 
   _closeModal() {
     this.setState({ openModal: {id: null, name: null } })
+  }
+
+  _displayError() {
+    this.setState({ error: !this.state.error })
   }
 }
 
