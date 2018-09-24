@@ -33,21 +33,24 @@ export default class MainView extends Component {
     const bars = ['Bars', 'Cocktail Bars', 'Australian', 'Pubs', 'Lounges', 'Wine Bars', 'Champagne Bars', 'Sports Bars', 'Cinema', 'Dance Clubs'];
     const restaurants = ['Restaurants', 'Cafes', 'Portuguese', 'British', 'Food Stands', 'Breakfast & Brunch', 'Sandwiches', 'Pizza', 'Italian', 'Burgers', 'American (New)', 'Mexican', 'Chicken Shop', 'Salad', 'Japanese', 'Asian Fusion', 'Indian', 'Desserts', 'French', 'Vietnamese', 'Street Vendors', 'American (Traditional)', 'Fish & Chips', 'Chinese'];
     if (Object.keys(this.state.data).length > 0) {
+      const restaurantColor = '#93f9b9';
+      const barColor = '#81d4fa';
       return <ViroARScene>
         {Object.keys(this.state.data).map(businessId => {
-          const barSrc = require('./res/cocktail.png');
-          const restaurantSrc = require('./res/icons8-meal-64.png');
+          const barSrc = require('./res/whatevAr-bar.png');
+          const restaurantSrc = require('./res/whatevAr-food.png');
           const questionMark = require('./res/question-mark.png');
-          const distance = this.state.data[businessId].distance
+          const distance = this.state.data[businessId].distance;
           return <ViroImage key={businessId} onClick={() => this._openAppModal(businessId)}
             onHover={() => { this._saveBusinessId(businessId) }}
             source={restaurants.includes(this.state.data[businessId].categories[0]) ? restaurantSrc : bars.includes(this.state.data[businessId].categories[0]) ? barSrc : questionMark}
-            scale={distance < 50 ? [10, 10, 10] : [18, 18, 18]} transformBehaviors={['billboard']}
-            position={[this.state.data[businessId].position[0], distance < 50 ? 8 : distance < 110 ? 10 : 33, this.state.data[businessId].position[2]]} />
+            scale={[distance / 5, distance / 5, distance / 5]}
+            transformBehaviors={['billboard']}
+            position={[this.state.data[businessId].position[0], distance / 6, this.state.data[businessId].position[2]]} />
         })}
-        {this.state.isHovering ? <Card business={this.state.data[this.state.onHoverId]} /> : null}
+        {this.state.isHovering ? <Card color={restaurants.includes(this.state.data[this.state.onHoverId].categories[0]) ? restaurantColor : barColor} business={this.state.data[this.state.onHoverId]} /> : null}
       </ViroARScene>
-      } else return <ViroARScene>
+    } else return <ViroARScene>
       <ViroText text='Loading...' scale={[1, 1, 1]} transformBehaviors={['billboard']} position={[0, 0, -2]} />
     </ViroARScene>
   }
@@ -55,7 +58,13 @@ export default class MainView extends Component {
   componentDidMount() {
     Geolocation.getCurrentPosition(
       (position) => {
-       // this.setState({ data })
+        // const filteredRes = {}
+        // for (let k in data) {
+        //   if (data[k].distance < 120) {
+        //     filteredRes[k] = data[k]
+        //   }
+        // }
+        // this.setState({ data: filteredRes })
         fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/${position.coords.latitude}/${position.coords.longitude}`)
           .then(buffer => buffer.json())
           .then(res => {
