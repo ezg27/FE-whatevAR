@@ -59,8 +59,8 @@ export default class MainView extends Component {
     Geolocation.getCurrentPosition(
       (position) => {
         //this.setState({ data })
-        fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/${position.coords.latitude}/${position.coords.longitude}`)
-          //fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/53.48267208293834/-2.234034634849604`)
+        // fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/${position.coords.latitude}/${position.coords.longitude}`)
+          fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/53.48267208293834/-2.234034634849604`)
           .then(buffer => buffer.json())
           .then(res => {
             if (res.message) {
