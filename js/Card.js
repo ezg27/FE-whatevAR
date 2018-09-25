@@ -6,22 +6,11 @@ import {
 } from 'react-viro';
 import propTypes from 'prop-types';
 import prices from './res/price/index.js'
+import rating from './res/rating/index.js'
 
 export default class Card extends Component {
 
   render() {
-    const images = {
-      image0: require('./res/0.png'),
-      image2: require('./res/2.png'),
-      image3: require('./res/3.png'),
-      image4: require('./res/4.png'),
-      image5: require('./res/5.png'),
-      image6: require('./res/6.png'),
-      image7: require('./res/7.png'),
-      image8: require('./res/8.png'),
-      image9: require('./res/9.png'),
-      image10: require('./res/10.png')
-    }
     let categories = '';
     this.props.business.categories.forEach((cat, index) => {
       if (index < 2) categories += cat + ', ';
@@ -51,7 +40,7 @@ export default class Card extends Component {
           />
         </ViroFlexView>
         <ViroFlexView backgroundColor={'white'} style={{ flex: 0.2, flexDirection: 'row' }} >
-          <ViroImage source={images['image' + this.props.business.rating]} style={{ flex: 1 }} scale={[0.5, 0.5, 0.5]} />
+          <ViroImage source={rating['image' + this.props.business.rating]} style={{ flex: 1 }} scale={[0.5, 0.5, 0.5]} />
         </ViroFlexView>
         <ViroFlexView backgroundColor={'white'} style={{ flex: 0.2, flexDirection: 'row' }} >
           <ViroText
