@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import data from '../businessData.json';
 import propTypes from 'prop-types';
+import hygiene_rating from './res/foodHygiene/index.js'
 import {
     Text,
     TouchableHighlight,
@@ -23,14 +24,6 @@ export default class BusinessModal extends Component {
         this._redirectToApp = this._redirectToApp.bind(this);
     }
     render() {
-        const hygiene_rating = {
-            'fhrs_5_en-gb': require('./res/fhrs_5_en-gb.jpg'),
-            'fhrs_4_en-gb': require('./res/fhrs_4_en-gb.jpg'),
-            'fhrs_3_en-gb': require('./res/fhrs_3_en-gb.jpg'),
-            'fhrs_2_en-gb': require('./res/fhrs_2_en-gb.jpg'),
-            'fhrs_1_en-gb': require('./res/fhrs_1_en-gb.jpg'),
-            'fhrs_0_en-gb': require('./res/fhrs_0_en-gb.jpg')
-        }
         if (Object.keys(this.state.business).length !== 0) {
             return (
                 <View style={localStyles.inner} >
@@ -57,6 +50,7 @@ export default class BusinessModal extends Component {
                         <View style={localStyles.day}><Text style={localStyles.text}>Sat: </Text><Text style={localStyles.hours}>{this.state.business.hours[5]}</Text></View>
                         <View style={localStyles.day}><Text style={localStyles.text}>Sun: </Text><Text style={localStyles.hours}>{this.state.business.hours[6]}</Text></View>
                     </View>
+                    {console.log(hygiene_rating)}
                     {this.state.business.foodRating ? <Image style={{ width: 130, height: 65, margin: 10 }} source={hygiene_rating[this.state.business.foodRating]} /> : null}
                     <TouchableHighlight style={this.state.business.name.length > 20 ? localStyles.button : localStyles.smallButton}
                         underlayColor={'#68a0ff'} onPress={this._handleOnClick}>
