@@ -5,6 +5,7 @@ import {
   ViroFlexView
 } from 'react-viro';
 import propTypes from 'prop-types';
+import prices from './res/price/index.js'
 
 export default class Card extends Component {
 
@@ -20,12 +21,6 @@ export default class Card extends Component {
       image8: require('./res/8.png'),
       image9: require('./res/9.png'),
       image10: require('./res/10.png')
-    }
-    const prices = {
-      '£': require('./res/£.png'),
-      '££': require('./res/££.png'),
-      '£££': require('./res/£££.png'),
-      '££££': require('./res/££££.png'),
     }
     let categories = '';
     this.props.business.categories.forEach((cat, index) => {
