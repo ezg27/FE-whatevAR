@@ -58,3 +58,4 @@ buck-out/
 # config/api-key
 
 /config.js
+__test__
