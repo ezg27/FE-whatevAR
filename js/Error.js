@@ -5,49 +5,49 @@ import {
     StyleSheet,
     ImageBackground,
     TouchableHighlight
- } 
- from 'react-native';
+}
+    from 'react-native';
 
 export default class Error extends Component {
 
-constructor() {
-    super()
-    this._handleOnPress = this._handleOnPress.bind(this);
-}
+    constructor() {
+        super()
+        this._handleOnPress = this._handleOnPress.bind(this);
+    }
 
     render() {
         return (
-            <ImageBackground source={require('./res/Mojito.jpg')} style={{width: '100%', height: '100%'}}>
-            <View style={localStyles.outer} >
-           <View style={localStyles.inner}>
-            <Text style={localStyles.titleText}>Whoooops!</Text>
-            <Text style={localStyles.titleText}>Something went wrong</Text>
-            <TouchableHighlight style={localStyles.button}
-                        underlayColor={'#68a0ff'} onPress={this._handleOnPress}>
-                        <Text style={localStyles.buttonText}>Retry</Text>
-                    </TouchableHighlight>
-        </View>
-        </View>
-          </ImageBackground>
+            <ImageBackground source={require('./res/Mojito.jpg')} style={{ width: '100%', height: '100%' }}>
+                <View style={localStyles.outer} >
+                    <View style={localStyles.inner}>
+                        <Text style={localStyles.titleText}>Whoooops!</Text>
+                        <Text style={localStyles.titleText}>Something went wrong</Text>
+                        <TouchableHighlight style={localStyles.button}
+                            underlayColor={'#68a0ff'} onPress={this._handleOnPress}>
+                            <Text style={localStyles.buttonText}>Retry</Text>
+                        </TouchableHighlight>
+                    </View>
+                </View>
+            </ImageBackground>
         )
     }
 
     _handleOnPress() {
-    this.props.displayError();
+        this.props.displayError();
     }
 }
 
 var localStyles = StyleSheet.create({
-    outer : {
-      flex : 1,
-      flexDirection: 'row',
-      alignItems:'center',
-      justifyContent: 'center'
+    outer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     inner: {
-      flex : 1,
-      flexDirection: 'column',
-      alignItems:'center'
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center'
     },
     titleText: {
         fontFamily: 'Avenir',

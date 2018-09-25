@@ -30,8 +30,8 @@ export default class MainView extends Component {
   }
 
   render() {
-    const bars = ['Bars', 'Cocktail Bars', 'Australian', 'Pubs', 'Lounges', 'Wine Bars', 'Champagne Bars', 'Sports Bars', 'Cinema', 'Dance Clubs'];
-    const restaurants = ['Restaurants', 'Cafes', 'Portuguese', 'British', 'Food Stands', 'Breakfast & Brunch', 'Sandwiches', 'Pizza', 'Italian', 'Burgers', 'American (New)', 'Mexican', 'Chicken Shop', 'Salad', 'Japanese', 'Asian Fusion', 'Indian', 'Desserts', 'French', 'Vietnamese', 'Street Vendors', 'American (Traditional)', 'Fish & Chips', 'Chinese'];
+    const bars = ['Bars', 'Cocktail Bars', 'Australian', 'Pubs', 'Pool House', 'Lounges', 'Wine Bars', 'Champagne Bars', 'Sports Bars', 'Cinema', 'Dance Clubs', 'Coffee & Tea', 'Pool Halls'];
+    const restaurants = ['Restaurants', 'Cafes', 'Portuguese', 'Cuban', 'Turkish', 'Halal', 'Caribbean', 'Music Venues', 'Lebanese', 'Steakhouses', 'Bowling', 'Delicatessen', 'Patisserie/Cake Shop', 'British', 'Food Stands', 'Breakfast & Brunch', 'Sandwiches', 'Pizza', 'Italian', 'Burgers', 'American (New)', 'Mexican', 'Chicken Shop', 'Salad', 'Japanese', 'Asian Fusion', 'Indian', 'Desserts', 'French', 'Vietnamese', 'Street Vendors', 'American (Traditional)', 'Fish & Chips', 'Chinese', 'Fast Food', 'Thai', 'Middle Eastern', 'Hot Dogs', 'Gastropubs', 'Sushi Bars', 'Spanish'];
     if (Object.keys(this.state.data).length > 0) {
       const restaurantColor = '#93f9b9';
       const barColor = '#81d4fa';
@@ -46,7 +46,7 @@ export default class MainView extends Component {
             source={restaurants.includes(this.state.data[businessId].categories[0]) ? restaurantSrc : bars.includes(this.state.data[businessId].categories[0]) ? barSrc : questionMark}
             scale={[distance / 5, distance / 5, distance / 5]}
             transformBehaviors={['billboard']}
-            position={[this.state.data[businessId].position[0], distance / 6, this.state.data[businessId].position[2]]} />
+            position={this.state.data[businessId].position} />
         })}
         {this.state.isHovering ? <Card color={restaurants.includes(this.state.data[this.state.onHoverId].categories[0]) ? restaurantColor : barColor} business={this.state.data[this.state.onHoverId]} /> : null}
       </ViroARScene>
@@ -58,14 +58,9 @@ export default class MainView extends Component {
   componentDidMount() {
     Geolocation.getCurrentPosition(
       (position) => {
-        // const filteredRes = {}
-        // for (let k in data) {
-        //   if (data[k].distance < 120) {
-        //     filteredRes[k] = data[k]
-        //   }
-        // }
-        // this.setState({ data: filteredRes })
+        //this.setState({ data })
         fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/${position.coords.latitude}/${position.coords.longitude}`)
+          //fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/53.48267208293834/-2.234034634849604`)
           .then(buffer => buffer.json())
           .then(res => {
             if (res.message) {
@@ -73,7 +68,7 @@ export default class MainView extends Component {
             } else {
               const filteredRes = {}
               for (let k in res) {
-                if (res[k].distance < 150) {
+                if (res[k].distance < 70) {
                   filteredRes[k] = res[k]
                 }
               }

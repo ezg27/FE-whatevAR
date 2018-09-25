@@ -5,36 +5,36 @@ import {
     StyleSheet,
     ImageBackground,
     Image
- } 
- from 'react-native'
+}
+    from 'react-native'
 
 export default class BusinessModal extends Component {
 
     render() {
         return (
-            <ImageBackground source={require('./res/Mojito.jpg')} style={{width: '100%', height: '100%'}}>
-            <View style={localStyles.outer} >
-            <View style={localStyles.inner} >
-            <Text style={localStyles.titleText}>WhatevAR</Text>
-            <Image source={require('./res/viro.png')} style={localStyles.bottomImage}></Image>
-            </View>
-          </View>
-          </ImageBackground>
+            <ImageBackground source={require('./res/Mojito.jpg')} style={{ width: '100%', height: '100%' }}>
+                <View style={localStyles.outer} >
+                    <View style={localStyles.inner} >
+                        <Text style={localStyles.titleText}>WhatevAR</Text>
+                        <Image source={require('./res/viro.png')} style={localStyles.bottomImage}></Image>
+                    </View>
+                </View>
+            </ImageBackground>
         )
     }
 }
 
 var localStyles = StyleSheet.create({
-    outer : {
-      flex : 1,
-      flexDirection: 'row',
-      alignItems:'center',
-      justifyContent: 'center'
+    outer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     inner: {
-      flex : 1,
-      flexDirection: 'column',
-      alignItems:'center'
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center'
     },
     titleText: {
         fontFamily: 'Avenir',

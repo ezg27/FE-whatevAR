@@ -3,7 +3,7 @@ import key from './config.js';
 import { ViroARSceneNavigator } from 'react-viro';
 import MainView from './js/MainView.js';
 import Error from './js/Error.js';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View, TouchableHighlight, Text } from 'react-native';
 import BusinessModal from './js/BusinessModal.js';
 import LoadingPage from './js/LoadingPage.js';
 
@@ -37,16 +37,16 @@ export default class ViroSample extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        { this.state.error ? <Error displayError={this._displayError}/> :
+        {this.state.error ? <Error displayError={this._displayError} /> :
           !this.state.openModal.id && this.state.loadingPage ? <LoadingPage /> :
-          this.state.openModal.id && !this.state.loadingPage ?
-            <BusinessModal closeModal={this._closeModal} business={this.state.openModal} displayError={this._displayError} /> :
-            <ViroARSceneNavigator
-              {...this.state.sharedProps}
-              initialScene={{ scene: MainView }}
-              worldAlignment="GravityAndHeading"
-              viroAppProps={{ openModal: this._openModal, displayError: this._displayError }}
-            />}
+            this.state.openModal.id && !this.state.loadingPage ?
+              <BusinessModal closeModal={this._closeModal} business={this.state.openModal} displayError={this._displayError} /> :
+              <ViroARSceneNavigator
+                {...this.state.sharedProps}
+                initialScene={{ scene: MainView }}
+                worldAlignment="GravityAndHeading"
+                viroAppProps={{ openModal: this._openModal, displayError: this._displayError }}
+              />}
         {!this.state.openModal.id && !this.state.loadingPage && !this.state.error ? <View style={styles.crosshair} /> : null}
       </View>
     );
@@ -76,7 +76,7 @@ export default class ViroSample extends Component {
   }
 
   _closeModal() {
-    this.setState({ openModal: {id: null, name: null } })
+    this.setState({ openModal: { id: null, name: null } })
   }
 
   _displayError() {
@@ -87,12 +87,28 @@ export default class ViroSample extends Component {
 const styles = StyleSheet.create({
   crosshair: {
     position: 'absolute',
-    top: (Dimensions.get('window').height / 2),
-    left: (Dimensions.get('window').width / 2),
+    top: (Dimensions.get('window').height / 2) - 10,
+    left: (Dimensions.get('window').width / 2) - 10,
     width: 15,
     height: 15,
     borderRadius: 15,
     borderWidth: 1,
     backgroundColor: '#ffebee'
   },
+  buttonText: {
+    fontFamily: 'Avenir',
+    color: '#1D976C',
+    textAlign: 'center',
+    fontSize: 25,
+    textAlignVertical: 'center'
+  },
+  button: {
+    height: 25,
+    width: '33%',
+    marginTop: 40,
+    marginBottom: 10,
+    borderRadius: 10,
+    marginLeft: '33%',
+    marginRight: '33%'
+  }
 })

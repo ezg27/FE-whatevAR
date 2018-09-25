@@ -37,8 +37,8 @@ export default class BusinessModal extends Component {
                     <View style={{ height: this.state.business.name.length < 20 ? '23%' : '28%', width: '100%', bottom: 20 }}>
                         <ImageBackground source={require('./res/Mojito.jpg')} style={{ width: '100%', height: '100%' }}>
                             <Text style={localStyles.titleText}>{this.state.business.name}</Text>
-                            {this.state.business.address ? <Text style={{fontSize: 20, textAlign: 'center', color: 'white'}}>{this.state.business.address}</Text> : null}
-                            {this.state.business.postcode ? <Text style={{fontSize: 20, textAlign: 'center', color: 'white'}}>{this.state.business.postcode}</Text> : null}
+                            {this.state.business.address ? <Text style={{ fontSize: 20, textAlign: 'center', color: 'white' }}>{this.state.business.address}</Text> : null}
+                            {this.state.business.postcode ? <Text style={{ fontSize: 20, textAlign: 'center', color: 'white' }}>{this.state.business.postcode}</Text> : null}
                             {this.state.business.phone ? <Text style={{ fontSize: 20, textAlign: 'center', color: 'white' }}>{this.state.business.phone}</Text> : null}
                         </ImageBackground>
                     </View>
@@ -70,7 +70,7 @@ export default class BusinessModal extends Component {
     }
 
     componentDidMount() {
-       //this.setState({ business: data })
+        //this.setState({ business: data })
         let businessName = this.props.business.name.toLowerCase().replace(/\s/g, '+').replace(/&/g, 'and');
         fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/business/${this.props.business.id}/${businessName}`)
             .then(buffer => buffer.json())
@@ -84,7 +84,7 @@ export default class BusinessModal extends Component {
                         hours: ['No listing', 'No listing', 'No listing', 'No listing', 'No listing', 'No listing', 'No listing']
                     }
                 })
-           });
+            });
     }
 
     _handleOnClick() {
@@ -93,7 +93,7 @@ export default class BusinessModal extends Component {
 
     _redirectToApp() {
         this.props.displayError()
-      }
+    }
 }
 
 BusinessModal.propTypes = {
