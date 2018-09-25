@@ -93,4 +93,3 @@ export default class MainView extends Component {
     this.props.arSceneNavigator.viroAppProps.displayError()
   }
 }
-
