@@ -20,12 +20,10 @@ export default class BusinessModal extends Component {
             business: {},
             error: false
         }
-        this._handleOnClick = this._handleOnClick.bind(this);
-        this._redirectToApp = this._redirectToApp.bind(this);
     }
     render() {
+        const lookupDays = ['Mon:', 'Tue:', 'Wed:', 'Thu:', 'Fri:', 'Sat:', 'Sun:']
         if (Object.keys(this.state.business).length !== 0) {
-            const lookupDays = ['Mon:', 'Tue:', 'Wed:', 'Thu:', 'Fri:', 'Sat:', 'Sun:']
             return (
                 <View style={localStyles.inner} >
                     <View style={{ height: this.state.business.name.length < 20 ? '23%' : '28%', width: '100%', bottom: 20 }}>
@@ -61,7 +59,6 @@ export default class BusinessModal extends Component {
     }
 
     componentDidMount() {
-        //this.setState({ business: data })
         let businessName = this.props.business.name.toLowerCase().replace(/\s/g, '+').replace(/&/g, 'and');
         fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/business/${this.props.business.id}/${businessName}`)
             .then(buffer => buffer.json())
@@ -72,17 +69,17 @@ export default class BusinessModal extends Component {
                 else this.setState({
                     business: {
                         ...res,
-                        hours: ['No listing', 'No listing', 'No listing', 'No listing', 'No listing', 'No listing', 'No listing']
+                        hours: Array.from({length: 7}, () => 'No Listing')
                     }
                 })
             });
     }
 
-    _handleOnClick() {
+    _handleOnClick = () => {
         this.props.closeModal();
     }
 
-    _redirectToApp() {
+    _redirectToApp = () => {
         this.props.displayError()
     }
 }
