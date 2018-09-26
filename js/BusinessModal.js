@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import data from '../businessData.json';
 import propTypes from 'prop-types';
 import hygiene_rating from './res/foodHygiene/index.js'
 import {
@@ -14,13 +13,11 @@ import {
 
 export default class BusinessModal extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            business: {},
-            error: false
-        }
+    state = {
+        business: {},
+        error: false
     }
+
     render() {
         const lookupDays = ['Mon:', 'Tue:', 'Wed:', 'Thu:', 'Fri:', 'Sat:', 'Sun:']
         if (Object.keys(this.state.business).length !== 0) {
@@ -41,11 +38,10 @@ export default class BusinessModal extends Component {
                     </View>
                     {this.state.business.isOpen === null ? null : this.state.business.isOpen ? <Text style={localStyles.open}>Open now</Text> : <Text style={localStyles.closed}>Closed now</Text>}
                     <View style={localStyles.openingTimes}>
-                    {this.state.business.hours.map((hours, i) => {
-                        return <View style={localStyles.day}><Text style={localStyles.text}>{lookupDays[i]} </Text><Text style={localStyles.hours}>{hours}</Text></View>
-                    })}
+                        {this.state.business.hours.map((hours, i) => {
+                            return <View style={localStyles.day}><Text style={localStyles.text}>{lookupDays[i]} </Text><Text style={localStyles.hours}>{hours}</Text></View>
+                        })}
                     </View>
-                    {console.log(hygiene_rating)}
                     {this.state.business.foodRating ? <Image style={{ width: 130, height: 65, margin: 10 }} source={hygiene_rating[this.state.business.foodRating]} /> : null}
                     <TouchableHighlight style={this.state.business.name.length > 20 ? localStyles.button : localStyles.smallButton}
                         underlayColor={'#68a0ff'} onPress={this._handleOnClick}>
@@ -69,7 +65,7 @@ export default class BusinessModal extends Component {
                 else this.setState({
                     business: {
                         ...res,
-                        hours: Array.from({length: 7}, () => 'No Listing')
+                        hours: Array.from({ length: 7 }, () => 'No Listing')
                     }
                 })
             });
@@ -90,7 +86,7 @@ BusinessModal.propTypes = {
     displayError: propTypes.func
 }
 
-var localStyles = StyleSheet.create({
+const localStyles = StyleSheet.create({
     inner: {
         flex: 1,
         flexDirection: 'column',
