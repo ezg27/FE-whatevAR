@@ -9,6 +9,7 @@ import {
   ViroImage
 } from 'react-viro';
 import icons from './res/icons/index.js'
+import {bars, restaurants} from './res/categories'
 import data from '../testData.json';
 
 export default class MainView extends Component {
@@ -31,8 +32,6 @@ export default class MainView extends Component {
   }
 
   render() {
-    const bars = ['Bars', 'Cocktail Bars', 'Australian', 'Pubs', 'Pool House', 'Lounges', 'Wine Bars', 'Champagne Bars', 'Sports Bars', 'Cinema', 'Dance Clubs', 'Coffee & Tea', 'Pool Halls'];
-    const restaurants = ['Restaurants', 'Cafes', 'Portuguese', 'Cuban', 'Turkish', 'Halal', 'Caribbean', 'Music Venues', 'Lebanese', 'Steakhouses', 'Bowling', 'Delicatessen', 'Patisserie/Cake Shop', 'British', 'Food Stands', 'Breakfast & Brunch', 'Sandwiches', 'Pizza', 'Italian', 'Burgers', 'American (New)', 'Mexican', 'Chicken Shop', 'Salad', 'Japanese', 'Asian Fusion', 'Indian', 'Desserts', 'French', 'Vietnamese', 'Street Vendors', 'American (Traditional)', 'Fish & Chips', 'Chinese', 'Fast Food', 'Thai', 'Middle Eastern', 'Hot Dogs', 'Gastropubs', 'Sushi Bars', 'Spanish'];
     if (Object.keys(this.state.data).length > 0) {
       const restaurantColor = '#93f9b9';
       const barColor = '#81d4fa';
