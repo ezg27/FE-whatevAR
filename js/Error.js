@@ -10,10 +10,6 @@ import {
 
 export default class Error extends Component {
 
-    constructor() {
-        super()
-    }
-
     render() {
         return (
             <ImageBackground source={require('./res/Mojito.jpg')} style={{ width: '100%', height: '100%' }}>
@@ -36,7 +32,7 @@ export default class Error extends Component {
     }
 }
 
-var localStyles = StyleSheet.create({
+const localStyles = StyleSheet.create({
     outer: {
         flex: 1,
         flexDirection: 'row',

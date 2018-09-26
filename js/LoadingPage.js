@@ -23,7 +23,7 @@ export default class BusinessModal extends Component {
     }
 }
 
-var localStyles = StyleSheet.create({
+const localStyles = StyleSheet.create({
     outer: {
         flex: 1,
         flexDirection: 'row',
