@@ -12,7 +12,6 @@ export default class Error extends Component {
 
     constructor() {
         super()
-        this._handleOnPress = this._handleOnPress.bind(this);
     }
 
     render() {
@@ -32,7 +31,7 @@ export default class Error extends Component {
         )
     }
 
-    _handleOnPress() {
+    _handleOnPress = () => {
         this.props.displayError();
     }
 }

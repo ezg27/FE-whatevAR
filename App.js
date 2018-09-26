@@ -3,6 +3,7 @@ import key from './config.js';
 import { ViroARSceneNavigator } from 'react-viro';
 import MainView from './js/MainView.js';
 import Error from './js/Error.js';
+import Geolocation from 'react-native-geolocation-service';
 import { Dimensions, StyleSheet, View, TouchableHighlight, Text } from 'react-native';
 import BusinessModal from './js/BusinessModal.js';
 import LoadingPage from './js/LoadingPage.js';
@@ -26,12 +27,9 @@ export default class ViroSample extends Component {
         name: null
       },
       loadingPage: true,
-      error: false
+      error: false,
+      data: {}
     };
-    this._exitViro = this._exitViro.bind(this);
-    this._openModal = this._openModal.bind(this);
-    this._closeModal = this._closeModal.bind(this);
-    this._displayError = this._displayError.bind(this);
   }
 
   render() {
@@ -45,7 +43,7 @@ export default class ViroSample extends Component {
                 {...this.state.sharedProps}
                 initialScene={{ scene: MainView }}
                 worldAlignment="GravityAndHeading"
-                viroAppProps={{ openModal: this._openModal, displayError: this._displayError }}
+                viroAppProps={{ openModal: this._openModal, displayError: this._displayError,  data: this.state.data}}
               />}
         {!this.state.openModal.id && !this.state.loadingPage && !this.state.error ? <View style={styles.crosshair} /> : null}
       </View>
@@ -53,6 +51,7 @@ export default class ViroSample extends Component {
   }
 
   componentDidMount() {
+    this._fetchData()
     setTimeout(() => {
       this.setState({
         loadingPage: false
@@ -60,13 +59,38 @@ export default class ViroSample extends Component {
     }, 2000)
   }
 
-  _exitViro() {
+  _fetchData = () => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        //this.setState({ data })
+        // fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/${position.coords.latitude}/${position.coords.longitude}`)
+        fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/53.48267208293834/-2.234034634849604`)
+          .then(buffer => buffer.json())
+          .then(res => {
+            if (res.message) {
+              this.setState({ error: true }, () => this._redirectToApp())
+            } else {
+              const filteredRes = {}
+              for (let k in res) {
+                if (res[k].distance < 70) {
+                  filteredRes[k] = res[k]
+                }
+              }
+              this.setState({ data: filteredRes })
+            }
+          });
+      },
+      (error) => this.setState({ error: true }),
+      { enableHighAccuracy: true, timeout: 2000, maximumAge: 2000 },
+    )
+  }
+  _exitViro =() => {
     this.setState({
       navigatorType: UNSET
     });
   }
 
-  _openModal(businessId, businessName) {
+  _openModal = (businessId, businessName) => {
     this.setState({
       openModal: {
         id: businessId,
@@ -75,11 +99,11 @@ export default class ViroSample extends Component {
     })
   }
 
-  _closeModal() {
+  _closeModal = () => {
     this.setState({ openModal: { id: null, name: null } })
   }
 
-  _displayError() {
+  _displayError = () => {
     this.setState({ error: !this.state.error })
   }
 }

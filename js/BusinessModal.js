@@ -20,10 +20,9 @@ export default class BusinessModal extends Component {
             business: {},
             error: false
         }
-        this._handleOnClick = this._handleOnClick.bind(this);
-        this._redirectToApp = this._redirectToApp.bind(this);
     }
     render() {
+        const lookupDays = ['Mon:', 'Tue:', 'Wed:', 'Thu:', 'Fri:', 'Sat:', 'Sun:']
         if (Object.keys(this.state.business).length !== 0) {
             return (
                 <View style={localStyles.inner} >
@@ -36,19 +35,15 @@ export default class BusinessModal extends Component {
                         </ImageBackground>
                     </View>
                     <View style={localStyles.images}>
-                        <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[0] }} />
-                        <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[1] }} />
-                        <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[2] }} />
+                        {this.state.business.photos.map(photo => {
+                            return <Image style={localStyles.singleImage} source={{ uri: photo }} />
+                        })}
                     </View>
                     {this.state.business.isOpen === null ? null : this.state.business.isOpen ? <Text style={localStyles.open}>Open now</Text> : <Text style={localStyles.closed}>Closed now</Text>}
                     <View style={localStyles.openingTimes}>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Mon: </Text><Text style={localStyles.hours}>{this.state.business.hours[0]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Tue: </Text><Text style={localStyles.hours}>{this.state.business.hours[1]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Wed: </Text><Text style={localStyles.hours}>{this.state.business.hours[2]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Thu: </Text><Text style={localStyles.hours}>{this.state.business.hours[3]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Fri: </Text><Text style={localStyles.hours}>{this.state.business.hours[4]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Sat: </Text><Text style={localStyles.hours}>{this.state.business.hours[5]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Sun: </Text><Text style={localStyles.hours}>{this.state.business.hours[6]}</Text></View>
+                    {this.state.business.hours.map((hours, i) => {
+                        return <View style={localStyles.day}><Text style={localStyles.text}>{lookupDays[i]} </Text><Text style={localStyles.hours}>{hours}</Text></View>
+                    })}
                     </View>
                     {console.log(hygiene_rating)}
                     {this.state.business.foodRating ? <Image style={{ width: 130, height: 65, margin: 10 }} source={hygiene_rating[this.state.business.foodRating]} /> : null}
@@ -64,7 +59,6 @@ export default class BusinessModal extends Component {
     }
 
     componentDidMount() {
-        //this.setState({ business: data })
         let businessName = this.props.business.name.toLowerCase().replace(/\s/g, '+').replace(/&/g, 'and');
         fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/business/${this.props.business.id}/${businessName}`)
             .then(buffer => buffer.json())
@@ -75,17 +69,17 @@ export default class BusinessModal extends Component {
                 else this.setState({
                     business: {
                         ...res,
-                        hours: ['No listing', 'No listing', 'No listing', 'No listing', 'No listing', 'No listing', 'No listing']
+                        hours: Array.from({length: 7}, () => 'No Listing')
                     }
                 })
             });
     }
 
-    _handleOnClick() {
+    _handleOnClick = () => {
         this.props.closeModal();
     }
 
-    _redirectToApp() {
+    _redirectToApp = () => {
         this.props.displayError()
     }
 }

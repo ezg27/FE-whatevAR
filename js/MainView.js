@@ -9,6 +9,7 @@ import {
   ViroImage
 } from 'react-viro';
 import icons from './res/icons/index.js'
+import {bars, restaurants} from './res/categories'
 import data from '../testData.json';
 
 export default class MainView extends Component {
@@ -24,15 +25,11 @@ export default class MainView extends Component {
       onHoverId: null,
       isHovering: false
     };
-
-    this._saveBusinessId = this._saveBusinessId.bind(this);
-    this._openAppModal = this._openAppModal.bind(this);
-    this._redirectToApp = this._redirectToApp.bind(this);
   }
 
   render() {
-    const bars = ['Bars', 'Cocktail Bars', 'Australian', 'Pubs', 'Pool House', 'Lounges', 'Wine Bars', 'Champagne Bars', 'Sports Bars', 'Cinema', 'Dance Clubs', 'Coffee & Tea', 'Pool Halls'];
-    const restaurants = ['Restaurants', 'Cafes', 'Portuguese', 'Cuban', 'Turkish', 'Halal', 'Caribbean', 'Music Venues', 'Lebanese', 'Steakhouses', 'Bowling', 'Delicatessen', 'Patisserie/Cake Shop', 'British', 'Food Stands', 'Breakfast & Brunch', 'Sandwiches', 'Pizza', 'Italian', 'Burgers', 'American (New)', 'Mexican', 'Chicken Shop', 'Salad', 'Japanese', 'Asian Fusion', 'Indian', 'Desserts', 'French', 'Vietnamese', 'Street Vendors', 'American (Traditional)', 'Fish & Chips', 'Chinese', 'Fast Food', 'Thai', 'Middle Eastern', 'Hot Dogs', 'Gastropubs', 'Sushi Bars', 'Spanish'];
+    const { data } = this.props.arSceneNavigator.viroAppProps.data
+    console.log(this.props)
     if (Object.keys(this.state.data).length > 0) {
       const restaurantColor = '#93f9b9';
       const barColor = '#81d4fa';
@@ -54,40 +51,20 @@ export default class MainView extends Component {
   }
 
   componentDidMount() {
-    Geolocation.getCurrentPosition(
-      (position) => {
-        //this.setState({ data })
-        // fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/${position.coords.latitude}/${position.coords.longitude}`)
-          fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/53.48267208293834/-2.234034634849604`)
-          .then(buffer => buffer.json())
-          .then(res => {
-            if (res.message) {
-              this.setState({ error: true }, () => this._redirectToApp())
-            } else {
-              const filteredRes = {}
-              for (let k in res) {
-                if (res[k].distance < 70) {
-                  filteredRes[k] = res[k]
-                }
-              }
-              this.setState({ data: filteredRes })
-            }
-          });
-      },
-      (error) => this.setState({ error: true }),
-      { enableHighAccuracy: true, timeout: 2000, maximumAge: 2000 },
-    )
+    this.setState({
+      data: this.props.sceneNavigator.viroAppProps.data
+    })
   }
 
-  _saveBusinessId(businessId) {
+  _saveBusinessId = (businessId) => {
     this.setState({ onHoverId: businessId, isHovering: !this.state.isHovering })
   }
 
-  _openAppModal(businessId) {
+  _openAppModal =(businessId) => {
     this.props.arSceneNavigator.viroAppProps.openModal(businessId, this.state.data[businessId].name)
   }
 
-  _redirectToApp() {
+  _redirectToApp = () => {
     this.props.arSceneNavigator.viroAppProps.displayError()
   }
 }
