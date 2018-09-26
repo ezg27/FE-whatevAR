@@ -28,6 +28,8 @@ export default class MainView extends Component {
   }
 
   render() {
+    const { data } = this.props.arSceneNavigator.viroAppProps.data
+    console.log(this.props)
     if (Object.keys(this.state.data).length > 0) {
       const restaurantColor = '#93f9b9';
       const barColor = '#81d4fa';
@@ -49,29 +51,9 @@ export default class MainView extends Component {
   }
 
   componentDidMount() {
-    Geolocation.getCurrentPosition(
-      (position) => {
-        //this.setState({ data })
-        // fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/${position.coords.latitude}/${position.coords.longitude}`)
-          fetch(`https://0p83k3udwg.execute-api.us-east-1.amazonaws.com/dev/api/device/businesses/53.48267208293834/-2.234034634849604`)
-          .then(buffer => buffer.json())
-          .then(res => {
-            if (res.message) {
-              this.setState({ error: true }, () => this._redirectToApp())
-            } else {
-              const filteredRes = {}
-              for (let k in res) {
-                if (res[k].distance < 70) {
-                  filteredRes[k] = res[k]
-                }
-              }
-              this.setState({ data: filteredRes })
-            }
-          });
-      },
-      (error) => this.setState({ error: true }),
-      { enableHighAccuracy: true, timeout: 2000, maximumAge: 2000 },
-    )
+    this.setState({
+      data: this.props.sceneNavigator.viroAppProps.data
+    })
   }
 
   _saveBusinessId = (businessId) => {
