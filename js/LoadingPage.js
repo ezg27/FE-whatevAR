@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    Text,
     View,
     StyleSheet,
     ImageBackground,
@@ -15,8 +14,8 @@ export default class BusinessModal extends Component {
             <ImageBackground source={require('./res/Mojito.jpg')} style={{ width: '100%', height: '100%' }}>
                 <View style={localStyles.outer} >
                     <View style={localStyles.inner} >
-                        <Text style={localStyles.titleText}>WhatevAR</Text>
-                        <Image source={require('./res/viro.png')} style={localStyles.bottomImage}></Image>
+                        <Image source={require('./res/logo_final.png')} style={localStyles.logo}/>
+                        <Image source={require('./res/viro.png')} style={localStyles.bottomImage}/>
                     </View>
                 </View>
             </ImageBackground>
@@ -36,21 +35,16 @@ var localStyles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center'
     },
-    titleText: {
-        fontFamily: 'Avenir',
-        fontSize: 50,
-        color: '#000000',
-        textAlignVertical: 'center',
-        textAlign: 'center',
-        fontWeight: 'bold',
-        color: 'white'
+    logo: {
+        height: 350,
+        width: 250
     },
     bottomImage: {
-        top: 200,
-        bottom: 0,
+        top: 60,
+        bottom: 30,
         right: 1,
         left: 1,
-        height: 130,
-        width: 200
+        height: 110,
+        width: 170
     }
 })
