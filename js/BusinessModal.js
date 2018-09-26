@@ -25,6 +25,7 @@ export default class BusinessModal extends Component {
     }
     render() {
         if (Object.keys(this.state.business).length !== 0) {
+            const lookupDays = ['Mon:', 'Tue:', 'Wed:', 'Thu:', 'Fri:', 'Sat:', 'Sun:']
             return (
                 <View style={localStyles.inner} >
                     <View style={{ height: this.state.business.name.length < 20 ? '23%' : '28%', width: '100%', bottom: 20 }}>
@@ -36,22 +37,15 @@ export default class BusinessModal extends Component {
                         </ImageBackground>
                     </View>
                     <View style={localStyles.images}>
-                        {console.log(this.state.business.photos)}
                         {this.state.business.photos.map(photo => {
                             return <Image style={localStyles.singleImage} source={{ uri: photo }} />
                         })}
-                        {/* <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[1] }} />
-                        <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[2] }} /> */}
                     </View>
                     {this.state.business.isOpen === null ? null : this.state.business.isOpen ? <Text style={localStyles.open}>Open now</Text> : <Text style={localStyles.closed}>Closed now</Text>}
                     <View style={localStyles.openingTimes}>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Mon: </Text><Text style={localStyles.hours}>{this.state.business.hours[0]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Tue: </Text><Text style={localStyles.hours}>{this.state.business.hours[1]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Wed: </Text><Text style={localStyles.hours}>{this.state.business.hours[2]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Thu: </Text><Text style={localStyles.hours}>{this.state.business.hours[3]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Fri: </Text><Text style={localStyles.hours}>{this.state.business.hours[4]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Sat: </Text><Text style={localStyles.hours}>{this.state.business.hours[5]}</Text></View>
-                        <View style={localStyles.day}><Text style={localStyles.text}>Sun: </Text><Text style={localStyles.hours}>{this.state.business.hours[6]}</Text></View>
+                    {this.state.business.hours.map((hours, i) => {
+                        return <View style={localStyles.day}><Text style={localStyles.text}>{lookupDays[i]} </Text><Text style={localStyles.hours}>{hours}</Text></View>
+                    })}
                     </View>
                     {console.log(hygiene_rating)}
                     {this.state.business.foodRating ? <Image style={{ width: 130, height: 65, margin: 10 }} source={hygiene_rating[this.state.business.foodRating]} /> : null}
