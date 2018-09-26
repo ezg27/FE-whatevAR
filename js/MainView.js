@@ -25,10 +25,6 @@ export default class MainView extends Component {
       onHoverId: null,
       isHovering: false
     };
-
-    this._saveBusinessId = this._saveBusinessId.bind(this);
-    this._openAppModal = this._openAppModal.bind(this);
-    this._redirectToApp = this._redirectToApp.bind(this);
   }
 
   render() {
@@ -78,15 +74,15 @@ export default class MainView extends Component {
     )
   }
 
-  _saveBusinessId(businessId) {
+  _saveBusinessId = (businessId) => {
     this.setState({ onHoverId: businessId, isHovering: !this.state.isHovering })
   }
 
-  _openAppModal(businessId) {
+  _openAppModal =(businessId) => {
     this.props.arSceneNavigator.viroAppProps.openModal(businessId, this.state.data[businessId].name)
   }
 
-  _redirectToApp() {
+  _redirectToApp = () => {
     this.props.arSceneNavigator.viroAppProps.displayError()
   }
 }
