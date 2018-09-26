@@ -8,6 +8,7 @@ import {
   ViroText,
   ViroImage
 } from 'react-viro';
+import icons from './res/icons/index.js'
 import data from '../testData.json';
 
 export default class MainView extends Component {
@@ -37,13 +38,10 @@ export default class MainView extends Component {
       const barColor = '#81d4fa';
       return <ViroARScene>
         {Object.keys(this.state.data).map(businessId => {
-          const barSrc = require('./res/whatevAr-bar.png');
-          const restaurantSrc = require('./res/whatevAr-food.png');
-          const questionMark = require('./res/question-mark.png');
-          const distance = this.state.data[businessId].distance;
+          const {distance} = this.state.data[businessId];
           return <ViroImage key={businessId} onClick={() => this._openAppModal(businessId)}
             onHover={() => { this._saveBusinessId(businessId) }}
-            source={restaurants.includes(this.state.data[businessId].categories[0]) ? restaurantSrc : bars.includes(this.state.data[businessId].categories[0]) ? barSrc : questionMark}
+            source={restaurants.includes(this.state.data[businessId].categories[0]) ? icons.food : bars.includes(this.state.data[businessId].categories[0]) ? icons.bar : icons.questionMark}
             scale={[distance / 5, distance / 5, distance / 5]}
             transformBehaviors={['billboard']}
             position={this.state.data[businessId].position} />
