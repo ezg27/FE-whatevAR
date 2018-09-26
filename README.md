@@ -1,6 +1,10 @@
 # WhatevAR
 
-WhatevAR is an augmented reality (AR) application built with ViroReact developer platform and React Native. The app projects virtual icons representing bars and restaurants when user is scanning his surroundings. User can hover over an icon to see information about particular establishment such as categories, Yelp rating and price range or click on an icon to see a modal containing opening times, pictures and Food Hygiene rating.
+WhatevAR is an augmented reality (AR) application built with ViroReact developer platform and React Native. The app takes the user's current location and projects virtual icons representing local bars and restaurants when user is scanning his surroundings. User can hover over an icon to see information about particular establishment such as categories, Yelp rating and price range, then click on the icon to see a full screen modal containing contact details, opening times, pictures and Food Hygiene rating.
+
+NOTES:
+* The app currently works on IOS devices
+* Food Hygiene Rating information is available in central Manchester area
 
 ## Installation
 
@@ -25,8 +29,9 @@ Run the following command from the root of this project:
 
 ## Instructions for running the app on your iPhone
 
-1. Download Viro Media app from App Store, slide out the left panel and select "Enter Testbed".
-2. Follow the instructions on the screen.
+1. Turn your location services on.
+2. Download Viro Media app from App Store, slide out the left panel and select "Enter Testbed".
+3. Follow the instructions on the screen.
 
 Enjoy!
 
