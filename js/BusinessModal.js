@@ -36,9 +36,12 @@ export default class BusinessModal extends Component {
                         </ImageBackground>
                     </View>
                     <View style={localStyles.images}>
-                        <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[0] }} />
-                        <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[1] }} />
-                        <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[2] }} />
+                        {console.log(this.state.business.photos)}
+                        {this.state.business.photos.map(photo => {
+                            return <Image style={localStyles.singleImage} source={{ uri: photo }} />
+                        })}
+                        {/* <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[1] }} />
+                        <Image style={localStyles.singleImage} source={{ uri: this.state.business.photos[2] }} /> */}
                     </View>
                     {this.state.business.isOpen === null ? null : this.state.business.isOpen ? <Text style={localStyles.open}>Open now</Text> : <Text style={localStyles.closed}>Closed now</Text>}
                     <View style={localStyles.openingTimes}>
