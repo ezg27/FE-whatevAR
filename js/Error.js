@@ -18,17 +18,13 @@ export default class Error extends Component {
                         <Text style={localStyles.titleText}>Whoooops!</Text>
                         <Text style={localStyles.titleText}>Something went wrong</Text>
                         <TouchableHighlight style={localStyles.button}
-                            underlayColor={'#68a0ff'} onPress={this._handleOnPress}>
+                            underlayColor={'#68a0ff'} onPress={this.props.displayError}>
                             <Text style={localStyles.buttonText}>Retry</Text>
                         </TouchableHighlight>
                     </View>
                 </View>
             </ImageBackground>
         )
-    }
-
-    _handleOnPress = () => {
-        this.props.displayError();
     }
 }
 

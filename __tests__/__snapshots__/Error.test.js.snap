@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../js/res/Mojito.jpg",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "height": "100%",
+          "width": "100%",
+        },
+        undefined,
+      ]
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "white",
+            "fontFamily": "Avenir",
+            "fontSize": 25,
+            "fontWeight": "bold",
+            "textAlign": "center",
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        Whoooops!
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "white",
+            "fontFamily": "Avenir",
+            "fontSize": 25,
+            "fontWeight": "bold",
+            "textAlign": "center",
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        Something went wrong
+      </Text>
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderRadius": 10,
+            "height": 45,
+            "marginBottom": 10,
+            "marginTop": 40,
+            "paddingBottom": 5,
+            "paddingTop": 5,
+            "width": 120,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#1D976C",
+              "fontFamily": "Avenir",
+              "fontSize": 25,
+              "textAlign": "center",
+              "textAlignVertical": "center",
+            }
+          }
+        >
+          Retry
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
