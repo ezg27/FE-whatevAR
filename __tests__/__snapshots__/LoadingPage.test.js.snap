@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingPage renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../js/res/Mojito.jpg",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "height": "100%",
+          "width": "100%",
+        },
+        undefined,
+      ]
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../js/res/logo_final.png",
+          }
+        }
+        style={
+          Object {
+            "height": 350,
+            "width": 250,
+          }
+        }
+      />
+      <Image
+        source={
+          Object {
+            "testUri": "../../../js/res/viro.png",
+          }
+        }
+        style={
+          Object {
+            "bottom": 30,
+            "height": 110,
+            "left": 1,
+            "right": 1,
+            "top": 60,
+            "width": 170,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
